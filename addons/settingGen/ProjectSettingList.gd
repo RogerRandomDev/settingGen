@@ -86,6 +86,7 @@ func _get_property_list():
 
 #call with nothing to initiate the base generation structure and layout
 func generate_project_settings()->void:
+	
 	for setting in settings_list:
 		setting.create_setting(_true_path+"%s/"%layer_name)
 	for layer in sub_lists:

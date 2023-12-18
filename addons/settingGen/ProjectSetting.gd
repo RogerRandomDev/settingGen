@@ -2,6 +2,14 @@
 extends Resource
 class_name ProjectSetting
 
+
+@export var mark_as_advanced:bool=false:
+	set(v):
+		mark_as_advanced=v
+		if ProjectSettings.has_setting(_last_created_at+setting_name):
+			remove_setting(_last_created_at)
+			create_setting(_last_created_at,true)
+
 @export var setting_name:StringName=&"":
 	set(v):
 		if ProjectSettings.has_setting(_last_created_at+setting_name):
@@ -46,6 +54,7 @@ func create_setting(layer_names:String,override_settings:bool=false)->void:
 	if ProjectSettings.has_setting(layer_names+setting_name)&&!override_settings:return
 	_last_created_at=layer_names
 	ProjectSettings.set_setting(layer_names+setting_name,setting_default)
+	ProjectSettings.set_as_basic(layer_names+setting_name,!mark_as_advanced)
 
 func remove_setting(layer_names:String)->void:
 	ProjectSettings.set_setting(layer_names+setting_name,null)
