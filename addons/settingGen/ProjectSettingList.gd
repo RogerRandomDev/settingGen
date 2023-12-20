@@ -70,6 +70,9 @@ var clear_current:bool=false:
 		clear_project_settings()
 
 
+func _init():
+	generate_true_paths()
+
 func _get_property_list():
 	if _true_path!="":return []
 	return [
@@ -131,11 +134,15 @@ func traverse_to(setting_path:String):
 
 func generate_true_paths():
 	for list in sub_lists:
-		list._true_path=_true_path+"/%s"%layer_name
+		list._true_path=_true_path.trim_suffix("/")+"/%s"%layer_name
 		list.generate_true_paths()
 	for setting in settings_list:
 		setting._last_created_at=_true_path+"/%s"%layer_name
+		setting._full_path=_true_path+"/%s"%layer_name
 
 
 func remove_sub_list(sub_list_resource):
 	sub_lists.erase(sub_list_resource)
+
+
+

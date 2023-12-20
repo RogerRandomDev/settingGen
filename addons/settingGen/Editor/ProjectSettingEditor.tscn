@@ -75,6 +75,7 @@ layout_mode = 2
 [node name="Tree" type="Tree" parent="Layout/SettingList/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+allow_reselect = true
 
 [node name="Button" type="Button" parent="Layout/SettingList/VBoxContainer"]
 layout_mode = 2
@@ -298,6 +299,8 @@ theme_override_styles/separator = SubResource("StyleBoxFlat_re1x3")
 
 [connection signal="pressed" from="Layout/ActiveProjectSettingList/TextureButton2" to="." method="_on_delete_layer_pressed"]
 [connection signal="pressed" from="Layout/ActiveProjectSettingList/SpecialButtons/TextureButton" to="." method="_on_delete_setting_pressed"]
+[connection signal="item_edited" from="Layout/SettingList/VBoxContainer/Tree" to="." method="_on_tree_item_edited"]
 [connection signal="item_mouse_selected" from="Layout/SettingList/VBoxContainer/Tree" to="." method="_on_tree_item_mouse_selected"]
+[connection signal="item_selected" from="Layout/SettingList/VBoxContainer/Tree" to="." method="_on_tree_item_selected"]
 [connection signal="pressed" from="Layout/SettingList/VBoxContainer/Button" to="." method="_on_add_layer_pressed"]
 [connection signal="pressed" from="Layout/SettingList/VBoxContainer2/HBoxContainer/VBoxContainer/Button" to="." method="_on_add_setting_to_layer_pressed"]

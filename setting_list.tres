@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="RootProjectSettingList" load_steps=4 format=3 uid="uid://cfcw4ol2av406"]
+[gd_resource type="Resource" script_class="RootProjectSettingList" load_steps=8 format=3 uid="uid://cfcw4ol2av406"]
 
 [ext_resource type="Script" path="res://addons/settingGen/RootProjectSettingList.gd" id="1_fmhjh"]
 [ext_resource type="Script" path="res://addons/settingGen/ProjectSetting.gd" id="2_y5rqq"]
+[ext_resource type="Script" path="res://addons/settingGen/ProjectSettingList.gd" id="3_vupyl"]
 
 [sub_resource type="Resource" id="Resource_23g55"]
 script = ExtResource("2_y5rqq")
@@ -10,10 +11,30 @@ setting_name = &"test_value"
 setting_type = 1
 setting_default = false
 
+[sub_resource type="Resource" id="Resource_der2a"]
+script = ExtResource("2_y5rqq")
+mark_as_advanced = true
+setting_name = &"test_setting_bool"
+setting_type = 1
+setting_default = false
+
+[sub_resource type="Resource" id="Resource_j5bde"]
+script = ExtResource("2_y5rqq")
+mark_as_advanced = true
+setting_name = &"test_setting_int"
+setting_type = 2
+setting_default = 0
+
+[sub_resource type="Resource" id="Resource_kxemd"]
+script = ExtResource("3_vupyl")
+layer_name = "test"
+settings_list = Array[ExtResource("2_y5rqq")]([SubResource("Resource_der2a"), SubResource("Resource_j5bde")])
+sub_lists = Array[ExtResource("3_vupyl")]([])
+
 [resource]
 script = ExtResource("1_fmhjh")
 layer_name = "test_name"
 settings_list = Array[ExtResource("2_y5rqq")]([SubResource("Resource_23g55")])
-sub_lists = Array[Resource("res://addons/settingGen/ProjectSettingList.gd")]([])
+sub_lists = Array[ExtResource("3_vupyl")]([SubResource("Resource_kxemd")])
 generate = false
 clear_current = false
