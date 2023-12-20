@@ -88,6 +88,7 @@ func _setting_grabbed_focus(current_setting):
 
 
 func _on_add_layer_pressed():
+	if active_loaded_file==null:return
 	var layer_name_input=$Layout/SettingList/VBoxContainer/layer_name
 	if layer_name_input.text==""||selected_sublist==null:return
 	var new_sub_list=ProjectSettingList.new()
@@ -96,18 +97,29 @@ func _on_add_layer_pressed():
 	
 	layer_name_input.text=""
 	update_loaded_file(active_loaded_file)
-	
+	active_loaded_file.notify_property_list_changed()
 
 
 func _on_delete_setting_pressed():
+	if active_loaded_file==null:return
 	pass # Replace with function body.
 
 
 func _on_delete_layer_pressed():
+	if active_loaded_file==null:return
 	var path_to=active_loaded_file.traverse_to(
 		selected_sublist._true_path
 		)
 	if path_to:
 		path_to.remove_sub_list(selected_sublist)
 	update_loaded_file(active_loaded_file)
+	active_loaded_file.notify_property_list_changed()
+
+
+func _on_add_setting_to_layer_pressed():
+	if active_loaded_file==null:return
+	var setting_name_input=$Layout/SettingList/VBoxContainer2/HBoxContainer/VBoxContainer/Label2
+	var setting_type_input=$Layout/SettingList/VBoxContainer2/HBoxContainer/VBoxContainer/HBoxContainer/OptionButton
+	var setting_advanced_check=$Layout/SettingList/VBoxContainer2/HBoxContainer/VBoxContainer/Button
 	
+
