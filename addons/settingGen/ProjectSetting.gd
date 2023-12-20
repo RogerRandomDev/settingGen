@@ -28,6 +28,11 @@ class_name ProjectSetting
 var setting_default=null:
 	set(v):
 		setting_default=v
+## set to choose a custom scene, the root should have a function
+## called "load_setting_data(variable_name:ProjectSetting)"
+@export var custom_menu_input:PackedScene
+
+
 
 #allows editing whenever neccessary
 var _last_created_at:String=""
@@ -58,3 +63,16 @@ func create_setting(layer_names:String,override_settings:bool=false)->void:
 
 func remove_setting(layer_names:String)->void:
 	ProjectSettings.set_setting(layer_names+setting_name,null)
+
+
+func load_menu_input():
+	var instanced_input=null
+	if custom_menu_input==null:
+		instanced_input=preload("res://addons/settingGen/Editor/defaultCustomInputs/base.res").instantiate()
+	else:
+		instanced_input=custom_menu_input.instantiate()
+	
+	instanced_input.load_setting_data(self)
+	
+	return instanced_input
+

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="RootProjectSettingList" load_steps=7 format=3 uid="uid://cfcw4ol2av406"]
+[gd_resource type="Resource" script_class="RootProjectSettingList" load_steps=10 format=3 uid="uid://cfcw4ol2av406"]
 
 [ext_resource type="Script" path="res://addons/settingGen/RootProjectSettingList.gd" id="1_fmhjh"]
 [ext_resource type="Script" path="res://addons/settingGen/ProjectSetting.gd" id="2_y5rqq"]
@@ -11,11 +11,30 @@ setting_name = &"test_value"
 setting_type = 1
 setting_default = false
 
+[sub_resource type="Resource" id="Resource_hgsla"]
+script = ExtResource("2_y5rqq")
+mark_as_advanced = false
+setting_name = &"just_a_test"
+setting_type = 1
+setting_default = false
+
+[sub_resource type="Resource" id="Resource_d6oeo"]
+script = ExtResource("3_sovs3")
+layer_name = "testagain"
+settings_list = Array[ExtResource("2_y5rqq")]([])
+sub_lists = Array[ExtResource("3_sovs3")]([])
+
+[sub_resource type="Resource" id="Resource_qkcym"]
+script = ExtResource("3_sovs3")
+layer_name = "test"
+settings_list = Array[ExtResource("2_y5rqq")]([])
+sub_lists = Array[ExtResource("3_sovs3")]([SubResource("Resource_d6oeo")])
+
 [sub_resource type="Resource" id="Resource_twhhb"]
 script = ExtResource("3_sovs3")
 layer_name = "test_name_2"
-settings_list = Array[ExtResource("2_y5rqq")]([])
-sub_lists = Array[ExtResource("3_sovs3")]([])
+settings_list = Array[ExtResource("2_y5rqq")]([SubResource("Resource_hgsla")])
+sub_lists = Array[ExtResource("3_sovs3")]([SubResource("Resource_qkcym")])
 
 [sub_resource type="Resource" id="Resource_4v8dt"]
 script = ExtResource("3_sovs3")

@@ -98,3 +98,44 @@ func clear_project_settings()->void:
 	for layer in sub_lists:
 		layer.clear_project_settings()
 
+
+#get the settings list at the path provided
+func get_settings_at_path(setting_path:String):
+	setting_path=setting_path.trim_prefix("/")
+	if setting_path.trim_suffix("/")==layer_name:return settings_list
+	var next_layer_name=setting_path.split("/")[1].trim_suffix("/")
+	
+	
+	for list in sub_lists:
+		if list.layer_name!=next_layer_name:continue
+		
+		var target_string=setting_path.trim_prefix(setting_path.split("/")[0])
+		var settings_in_layer=list.get_settings_at_path(target_string)
+		
+		if settings_in_layer:return settings_in_layer
+	return null
+
+
+func traverse_to(setting_path:String):
+	setting_path=setting_path.trim_prefix("/")
+	if setting_path.trim_suffix("/")==layer_name:return self
+	var next_layer_name=setting_path.split("/")[1].trim_suffix("/")
+	for list in sub_lists:
+		if list.layer_name!=next_layer_name:continue
+		
+		var target_string=setting_path.trim_prefix(setting_path.split("/")[0])
+		var settings_in_layer=list.traverse_to(target_string)
+		
+		if settings_in_layer:return settings_in_layer
+	return null
+
+func generate_true_paths():
+	for list in sub_lists:
+		list._true_path=_true_path+"/%s"%layer_name
+		list.generate_true_paths()
+	for setting in settings_list:
+		setting._last_created_at=_true_path+"/%s"%layer_name
+
+
+func remove_sub_list(sub_list_resource):
+	sub_lists.erase(sub_list_resource)
